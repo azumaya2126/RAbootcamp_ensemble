@@ -1,10 +1,12 @@
-owid_co2_data
+data1 <- read.csv("owid-co2-data.csv")
 
-colnames(owid_co2_data)
+colnames(data1)
 
-owid_co2_data |> dplyr::select(
+data1 |> dplyr::select(
 country, 
 year,
 gdp,
 co2,
 )
+
+
