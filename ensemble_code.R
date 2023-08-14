@@ -23,8 +23,9 @@ data_2 <- data1 |>
     population) |>
   filter(!is.na(country) & !is.na(year)& !is.na(gdp) & !is.na(co2) & !is.na(population)) |>
   mutate(co2_percap = co2/population*1000000,
-         gdp_percap = (gdp/1000) /population)
-
+         gdp_percap = (gdp/1000) /population) |>
+  filter(year >=1950) |>
+  filter(year <=2018)
 head(data_2)
 
 
@@ -40,5 +41,11 @@ plot1 <- ggplot(data_canada,
               title = "Canada")
 plot1
 
-data_2 |> filter(country == "China" | country == "United States")
-
+data_China_US <- data_2 |> filter(country == "China" | country == "United States")
+plot2 <- ggplot(data_China_US,
+                aes(x = gdp_percap, y = co2_percap))+
+         geom_line()+
+         labs(x = "GDP per capita ($1000)",
+              y = "CO2 per capita (g)",
+              title = "China&US")
+plot2
